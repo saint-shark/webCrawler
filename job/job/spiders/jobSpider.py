@@ -4,28 +4,28 @@ from job.items import JobItem
 
 
 
-class stackSpider(Spider):
+class jobSpider(Spider):
 
     name = "job"
     allowedDomain = ["https://www.naukri.com"]
-    start_urls = ["https://www.naukri.com/jobs-in-raipur"]
+    start_urls = ["https://www.naukri.com/jobs-in-raipur","https://www.naukri.com/jobs-in-raipur-2"]
 
 
     def parse(self, response):
 
-        jobs = Selector(response).xpath('//div[@class="row  "]/a')
+        jobs = response.css('.content')
         for job in jobs:
             item = JobItem()
-            item['designation'] = job.xpath(
-                'ul/li[@class="desig"]/text()').extract()[0]
-            item['company'] = job.xpath(
-                'span[@class="org"]/text()').extract()[0]
-            item['experience'] = job.xpath(
-                'span[@class="exp"]/text()').extract()[0]
-            item['location'] = job.xpath(
-                'span/span[@class="loc"]/text()').extract()[0]
-            item['skill'] = job.xpath(
-                'div/div[@class="skill"]/text()').extract()[0]
-            item['jobDescription'] = job.xpath(
-                'div/span[@class="desc"]/text()').extract()[0]
+            item['designation'] = job.css('.desig::text').extract()[0]
+            item['company'] = job.css('.org::text').extract()[0]
+            item['skill'] = job.css('.skill::text').extract()[0]
+            item['jobDescription'] = job.css('.desc::text').extract()[0]
             yield item
+#
+# for job in response.css('.content'):
+# ...     desig = job.css('.desig::text').extract()
+# ...     comp = job.css('.org::text').extract()
+# ...     location = job.css('.loc::text').extract()
+# ...     skills = job.css('.skill::text').extract()
+# ...     description = job.css('.desc::text').extract()
+# ...     print(dict(designation = desig, company = comp, location = location, skills = skills, decription = description))

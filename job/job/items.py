@@ -11,7 +11,7 @@ import scrapy
 class JobItem(scrapy.Item):
     designation = scrapy.Field()
     company = scrapy.Field()
-    experience = scrapy.Field()
-    location = scrapy.Field()
+   #experience = scrapy.Field()
+   #location = scrapy.Field()
     skill = scrapy.Field()
     jobDescription = scrapy.Field()

@@ -1,3 +1,4 @@
+
 from scrapy import Spider
 from scrapy.selector import Selector
 from stack.items import StackItem
@@ -12,6 +13,7 @@ class stackSpider(Spider):
 
 
     def parse(self, response):
+        print("Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
 
         questions = Selector(response).xpath('//div[@class="summary"]/h3')
         for question in questions:
